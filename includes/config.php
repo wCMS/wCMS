@@ -6,6 +6,6 @@ $dbuser = "root";
 $dbpasswd = "";
 $dbname = "";
 //do not touch following
-$version = "1.0beta";
+$version = "1.0";
 $show = "Copyright by ".$sitename." - Version ".$version;
 ?>
