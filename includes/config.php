@@ -1,4 +1,4 @@
-<a href="login.php">Einloggen</a> | <a href="login.php?logout">Ausloggen</a> | <a href="register.php">Registrieren</a><hr>
+<a href="index.php">Index</a> | <a href="login.php">Einloggen</a> | <a href="login.php?logout">Ausloggen</a> | <a href="register.php">Registrieren</a><hr>
 <?php
 $sitename = "wCMS";
 $dbhost = "localhost";
