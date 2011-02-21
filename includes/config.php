@@ -7,5 +7,5 @@ $dbpasswd = "";
 $dbname = "";
 //do not touch following
 $version = "1.0";
-$show = "Copyright by ".$sitename." - Version ".$version;
+$show = "Copyright by ".$sitename." - wCMS v".$version;
 ?>
