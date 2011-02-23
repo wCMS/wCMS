@@ -1,2 +1,10 @@
 WARNING: DO NOT USE THIS CMS AT KILU.DE!
 THE HEADER-REDIRECTION DOES NOT WORK AT KILU.DE AND CAUSE AUF THAT ITS NOT SAFE THERE!
+
+How-To:
+
+1. Upload the files to your Webserver
+2. Run the install.php
+3. Fill out the required information
+4. Have fun
+5. @problems please contact
