@@ -1,5 +1,6 @@
 <?php
-include "includes/config.php";
+include "lib/config.php";
+include "lib/header.php";
 ?>
 <title>Login - <? echo $sitename ?></title>
 <?php session_start (); ?> 
@@ -40,7 +41,7 @@ $result = mysql_query ($sql);
 if (mysql_num_rows ($result) > 0)  
 {   
  $data = mysql_fetch_array ($result);  
-$sql2 = ("Select admin from Accounts WHERE username = '".$_POST['name']."'");
+$sql2 = ("Select admin from accounts WHERE username = '".$_POST['name']."' and admin = '1'");
 $result2 = mysql_query($sql2);
 $rows = mysql_num_rows($result2);
 if($rows == 1) { 

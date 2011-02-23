@@ -1,5 +1,6 @@
 <?php
-include "includes/config.php";
+include "lib/config.php";
+include "lib/header.php";
 ?>
 <title>Registrierung - <? echo $sitename ?></title>
 <form action="?register" method="post">
@@ -8,12 +9,11 @@ Passwort: <input type="password" name="password" width="20"><br>
 <input type="submit" name="register" value="Registrieren">
 </form>
 <?php
-mysql_connect($dbhost, $dbuser, $dbpasswd) or die ("Verbindung zur Datenbank konnten nicht hergestellt werden!");
-mysql_select_db($dbname) or die ("Die Datenbank ".$dbname." konnte nicht geöffnet werden!");
+include "lib/mysql.php";
 if(isset($_POST['register'])) {
 $user = $_POST['username'];
 $pw = sha1($_POST['password']);
-$sql = ("Select username from Accounts WHERE username = '".$user."'");
+$sql = "Select username from accounts WHERE username = '".$user."'";
 $result = mysql_query($sql);
 $rows = mysql_num_rows($result);
 if($rows == 1) {
@@ -26,4 +26,4 @@ echo "User wurde erstellt!";
 }
 ?>
 <hr>
-<? echo $show ?>
+<? echo $footer ?>

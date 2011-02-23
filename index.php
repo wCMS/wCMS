@@ -1,7 +1,10 @@
 <?php  
-include "includes/config.php"; 
-mysql_connect($dbhost, $dbuser, $dbpasswd) or die ("Keine Verbindung zum MySQL Server!");
-mysql_select_db($dbname) or die ("Die Datenbank ".$dbname." konnte nicht geöffnet werden!");
+if(file_exists("install.php")) {
+unlink("install.php");
+}
+include "lib/config.php"; 
+include "lib/mysql.php";
+include "lib/header.php";
 ?>  
 <html>  
 <head>  
@@ -14,6 +17,6 @@ $text = str_replace("\n", "<br>", $sql['text']);
 echo 'Titel: '.$sql['name'].'<br><br>'.$text.'<br><br>Von '.$sql['username'].' geschrieben<hr>';
 }
 ?>  
-<? echo $show ?>  
+<? echo $footer ?>  
 </body>  
 </html>
