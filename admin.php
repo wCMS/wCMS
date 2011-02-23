@@ -3,7 +3,7 @@ include "lib/config.php";
 include "lib/adm_session.php";
 include "lib/mysql.php";
 include "lib/header.php";
-?><a href="admin.php?create">Beitrag erstellen</a> | <a href="admin.php?delete">Beitrag löschen</a> | <a href="admin.php?userdelete">Benutzer löschen</a> | <a href="admin.php?users">Benutzerliste</a> | <a href="admin.php?usermanagement">Benutzerverwaltung</a><hr><?
+?><center><a href="admin.php?create">Beitrag erstellen</a> | <a href="admin.php?delete">Beitrag löschen</a> | <a href="admin.php?userdelete">Benutzer löschen</a> | <a href="admin.php?users">Benutzerliste</a> | <a href="admin.php?usermanagement">Benutzerverwaltung</a></center><hr><?
 if(isset($_REQUEST['create'])) { ?>
 <title>Beitrag erstellen - <? echo $sitename ?></title>
 <form action="" method="post">

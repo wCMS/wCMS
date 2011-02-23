@@ -1,3 +1,4 @@
+<center>
 <?php
 include "lib/config.php";
 include "lib/header.php";
@@ -73,3 +74,4 @@ header ("Location: index.php");
 ob_end_flush ();  
 } 
 ?>
+</center>

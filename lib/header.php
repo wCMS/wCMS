@@ -1,4 +1,4 @@
-<a href="index.php">Index</a>
+<center><a href="index.php">Index</a>
 <?
 session_start();
 include 'config.php';
@@ -16,4 +16,5 @@ if($rows == 1) {
 echo " | <a href=\"admin.php\">Adminpanel</a>";
 }
 ?>
+</center>
 <hr>
