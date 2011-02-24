@@ -1,7 +1,9 @@
 <?php  
-if(file_exists("install.php")) {
-unlink("install.php");
+if(file_exists("lib/install")) {
+echo "<center>Das Script ist nicht installiert! Jetzt installieren? <a href=\"install.php\">Ja</a> oder <a href=\"index.php\">Nein</a></center>";
+die;
 }
+else {
 include "lib/config.php"; 
 include "lib/mysql.php";
 include "lib/header.php";
@@ -15,6 +17,7 @@ include "lib/header.php";
 while($sql = mysql_fetch_array($sqls)) {
 $text = str_replace("\n", "<br>", $sql['text']);
 echo 'Titel: '.$sql['name'].'<br><br>'.$text.'<br><br>Von '.$sql['username'].' geschrieben<hr>';
+}
 }
 ?>  
 <? echo $footer ?>  

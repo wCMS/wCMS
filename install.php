@@ -1,5 +1,10 @@
 <center>
 <?
+if(!file_exists("lib/install")) {
+echo "wCMS ist bereits installiert!";
+die;
+}
+else {
 include 'lib/config.php';
 $cmsversion = "1.1";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
@@ -82,12 +87,15 @@ header("Location: install.php?success");
 if(isset($_REQUEST['success'])) {
 echo "Installation erfolgreich";
 ?>
-<form action="admin.php?success" method="post">
+<form action="install.php?success" method="post">
 <input type="submit" name="complete" value="Installation abschließen">
 </form>
 <?
 if(isset($_POST['complete'])) {
+unlink("lib/install");
 header ("Location: index.php");
+echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"index.php\">HIER</a>";
+}
 }
 }
 ?>
