@@ -5,7 +5,6 @@ echo "wCMS ist bereits installiert!";
 die;
 }
 else {
-include 'lib/config.php';
 $cmsversion = "1.1";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 ?>
@@ -30,7 +29,7 @@ $configfile = "lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - wCMS v\".\$version;\n?>";
 if (is_writable($configfile)) {
 
-    if (!$handle = fopen($configfile, "a")) {
+    if (!$handle = fopen($configfile, "w+")) {
          print "Kann die Datei $configfile nicht öffnen";
          exit;
     }
@@ -49,6 +48,7 @@ if (is_writable($configfile)) {
 }
 }
 if(isset($_REQUEST['step3'])) {
+include 'lib/config.php';
 include 'lib/mysql.php';
 mysql_query("CREATE TABLE `accounts` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
@@ -74,6 +74,7 @@ Passwort: <input type="password" name="password" maxlength="25"><br>
 <input type="submit" name="create" value="erstellen">
 </form> <?
 if(isset($_POST['create'])) {
+include 'lib/config.php';
 include 'lib/mysql.php';
 $user = $_POST['username'];
 $pw = sha1($_POST['password']);
