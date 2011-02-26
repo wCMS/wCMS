@@ -1,3 +1,4 @@
-//File currently in dev state!
 <?php
+include "lib/config.php";
 ?>
+<title>Redirecting... - <? echo $sitename ?></title>
