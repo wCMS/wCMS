@@ -5,7 +5,7 @@ echo "wCMS ist bereits installiert!";
 die;
 }
 else {
-$cmsversion = "1.1";
+$cmsversion = "1.2-dev";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 ?>
 <title>wCMS Installation</title>
