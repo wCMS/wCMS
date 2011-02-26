@@ -99,6 +99,7 @@ echo "<hr>".$footer;
 }
 if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement'])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
+echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;
 }
 ?>
