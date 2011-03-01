@@ -3,7 +3,7 @@ include "lib/config.php";
 include "lib/adm_session.php";
 include "lib/mysql.php";
 include "lib/header.php";
-?><center><a href="admin.php?create">Beitrag erstellen</a> | <a href="admin.php?delete">Beitrag löschen</a> | <a href="admin.php?userdelete">Benutzer löschen</a> | <a href="admin.php?users">Benutzerliste</a> | <a href="admin.php?usermanagement">Benutzerverwaltung</a></center><hr><?
+?><center><a href="admin.php?createnews">News erstellen</a> | <a href="admin.php?create">Beitrag erstellen</a> | <a href="admin.php?deletenews">News löschen</a> | <a href="admin.php?delete">Beitrag löschen</a> | <a href="admin.php?userdelete">Benutzer löschen</a> | <a href="admin.php?users">Benutzerliste</a> | <a href="admin.php?usermanagement">Benutzerverwaltung</a></center><hr><?
 if(isset($_REQUEST['create'])) { ?>
 <title>Beitrag erstellen - <? echo $sitename ?></title>
 <form action="" method="post">
@@ -97,7 +97,46 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement'])) {
+if(isset($_REQUEST['createnews'])) { ?>
+<title>News erstellen - <? echo $sitename ?></title>
+<form action="" method="post">
+Titel: <input type="text" name="name" size="80" maxlength="50"><br>
+<textarea type="text" name="text" style="width:100%; height:72%"></textarea>
+<input type="submit" name="newssubmit" value="erstellen"
+<form>
+<?
+echo "<hr>".$footer;
+}
+if(isset($_POST['newssubmit'])) {
+$name = $_POST['name'];
+$text = $_POST['text'];
+if(empty($name)) {
+header ("Location: admin.php?titleerror");
+}
+else {
+mysql_query("INSERT INTO news (name, text, username) VALUES ('".$name."', '".$text."', '".$_SESSION['adm_user_username']."')");
+
+header ("Location: admin.php?success");
+}
+}
+if(isset($_REQUEST['deletenews'])) {
+?> <title>News löschen - <? echo $sitename ?></title> <?
+$sqls = mysql_query("select name,username from news");
+while($sql33 = mysql_fetch_array($sqls)) {
+?>
+<form action="" method="post">
+<input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33['name']; ?>">
+</form>
+<?
+if(isset($_POST[$sql33['name']."news"])) {
+mysql_query("DELETE FROM news WHERE name = '".$_POST[$sql33['name']]."'");
+
+header ("Location: admin.php?success");
+}
+}
+echo "<hr>".$footer;
+}
+if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews'])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;

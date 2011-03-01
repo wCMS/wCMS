@@ -65,6 +65,13 @@ mysql_query("CREATE TABLE `posts` (
   `text` text COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
+mysql_query("CREATE TABLE `news` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `username` text COLLATE latin1_german1_ci NOT NULL,
+  `name` text COLLATE latin1_german1_ci NOT NULL,
+  `text` text COLLATE latin1_german1_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
 header("Location: install.php?step4");
 }
 if(isset($_REQUEST['step4'])) {
