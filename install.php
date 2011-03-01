@@ -1,3 +1,4 @@
+<title>wCMS Installation</title>
 <center>
 <?
 if(!file_exists("lib/install")) {
@@ -5,10 +6,9 @@ echo "wCMS ist bereits installiert!";
 die;
 }
 else {
-$cmsversion = "1.2-dev";
+$cmsversion = "1.2-dev2";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 ?>
-<title>wCMS Installation</title>
 <a href="install.php?step1">Mit der Installation beginnen</a>
 </form>
 <?
@@ -26,7 +26,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" maxlength="50"><br>
 }
 if(isset($_REQUEST['step2'])) {
 $configfile = "lib/config.php";
-$write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - wCMS v\".\$version;\n?>";
+$write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - wCMS \".\$version;\n?>";
 if (is_writable($configfile)) {
 
     if (!$handle = fopen($configfile, "w+")) {
@@ -89,6 +89,7 @@ $sql = ("Select username from accounts WHERE username = '".$user."'");
 $result = mysql_query($sql);
 $rows = mysql_num_rows($result);
 mysql_query("INSERT INTO accounts (username, password, admin, safe) VALUES ('".$user."', '".$pw."', '1', '1')") or die ("Fehler beim erstellen des Administrators!");
+mysql_query("INSERT INTO news (username, name, text) VALUES ($user, \"Glückwunsch!\", \"Glückwunsch!\nDu hast erfolgreich wCMS ".$version." installiert!\nDu kannst diesen Newseintrag im Adminpanel löschen!\n\nMit freundlichen Grüßen, dein wCMS Team") or die("Fehler beim erstellen der Erstnews!");
 header("Location: install.php?success");
 }
 }

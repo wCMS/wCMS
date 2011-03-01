@@ -121,15 +121,15 @@ header ("Location: admin.php?success");
 }
 if(isset($_REQUEST['deletenews'])) {
 ?> <title>News löschen - <? echo $sitename ?></title> <?
-$sqls = mysql_query("select name,username from news");
-while($sql33 = mysql_fetch_array($sqls)) {
+$sqls33 = mysql_query("select name,username from news");
+while($sql33 = mysql_fetch_array($sqls33)) {
 ?>
 <form action="" method="post">
 <input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33['name']; ?>">
 </form>
 <?
-if(isset($_POST[$sql33['name']."news"])) {
-mysql_query("DELETE FROM news WHERE name = '".$_POST[$sql33['name']]."'");
+if(isset($_POST[$sql33['name']])) {
+mysql_query("DELETE FROM news WHERE name = '".$sql33['name']."'");
 
 header ("Location: admin.php?success");
 }
