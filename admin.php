@@ -30,13 +30,17 @@ if(isset($_REQUEST['delete'])) {
 ?> <title>Beitrag löschen - <? echo $sitename ?></title> <?
 $sqls = mysql_query("select name,username from posts");
 while($sql = mysql_fetch_array($sqls)) {
+$sqlnametemp = str_replace(" ", "_", $sql['name']);
+$sqlname = str_replace("!", "###", $sqlnametemp);
 ?>
 <form action="" method="post">
-<input type="submit" value="<? echo $sql['name']." von ".$sql['username']." löschen"; ?>" name="<? echo $sql['name']; ?>">
+<input type="submit" value="<? echo $sql['name']." von ".$sql['username']." löschen"; ?>" name="<? echo $sqlname; ?>">
 </form>
 <?
-if(isset($_POST[$sql['name']])) {
-mysql_query("DELETE FROM posts WHERE name = '".$sql['name']."'");
+if(isset($_POST[$sqlname])) {
+$sqlcorrectnametemp = str_replace("_", " ", $sqlname);
+$sqlcorrectname = str_replace("###", "!", $sqlcorrectnametemp);
+mysql_query("DELETE FROM posts WHERE name = '".$sqlcorrectname."'");
 
 header ("Location: admin.php?success");
 }
@@ -123,20 +127,22 @@ if(isset($_REQUEST['deletenews'])) {
 ?> <title>News löschen - <? echo $sitename ?></title> <?
 $sqls33 = mysql_query("select name,username from news");
 while($sql33 = mysql_fetch_array($sqls33)) {
+$sql33name = str_replace(" ", "_", $sql33['name']);
 ?>
 <form action="" method="post">
-<input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33['name']; ?>">
+<input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33name; ?>">
 </form>
 <?
-if(isset($_POST[$sql33['name']])) {
-mysql_query("DELETE FROM news WHERE name = '".$sql33['name']."'");
+if(isset($_POST[$sql33name])) {
+$sql33correctname = str_replace("_", " ", $sql33name);
+mysql_query("DELETE FROM news WHERE name = '".$sql33correctname."'");
 
 header ("Location: admin.php?success");
 }
 }
 echo "<hr>".$footer;
 }
-if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews'])) {
+if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews']) and !isset($_REQUEST['success'])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;

@@ -8,11 +8,12 @@ die;
 else {
 include 'lib/config.php';
 $cmsversion = "1.2-dev2";
+
+if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
 if($version == $cmsversion) {
 echo "Kein Upgrade möglich.<br>Es wird bereits die aktuelle Version genutzt oder es wurden keine Veränderungen an der Datenbank vorgenommen";
 die;
 }
-if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
 ?>
 <a href="upgrade.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
@@ -64,14 +65,13 @@ mysql_query("CREATE TABLE `news` (
 header("Location: upgrade.php?success");
 }
 if(isset($_REQUEST['success'])) {
-echo "Installation erfolgreich";
+echo "Upgrade erfolgreich";
 ?>
 <form action="upgrade.php?success" method="post">
-<input type="submit" name="complete" value="Installation abschließen">
+<input type="submit" name="complete" value="Upgrade abschließen">
 </form>
 <?
 if(isset($_POST['complete'])) {
-unlink("lib/install");
 header ("Location: index.php");
 echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"index.php\">HIER</a>";
 }
