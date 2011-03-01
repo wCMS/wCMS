@@ -8,7 +8,7 @@ die;
 else {
 include 'lib/config.php';
 $cmsversion = "1.2-dev2";
-if($version = $cmsversion) {
+if($version == $cmsversion) {
 echo "Kein Upgrade möglich.<br>Es wird bereits die aktuelle Version genutzt oder es wurden keine Veränderungen an der Datenbank vorgenommen";
 die;
 }
