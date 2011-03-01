@@ -2,7 +2,7 @@
 <center>
 <?
 if(!file_exists("lib/install")) {
-echo "wCMS ist bereits installiert!";
+echo "wCMS ist bereits installiert! Um ein Upgrade zu machen, klicke bitte <a href=\"upgrade.php\">HIER</a>";
 die;
 }
 else {
