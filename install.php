@@ -6,7 +6,7 @@ echo "wCMS ist bereits installiert! Um ein Upgrade zu machen, klicke bitte <a hr
 die;
 }
 else {
-$cmsversion = "1.2-dev2";
+$cmsversion = "1.2";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 ?>
 <a href="install.php?step1">Mit der Installation beginnen</a>

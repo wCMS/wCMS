@@ -7,7 +7,7 @@ die;
 }
 else {
 include 'lib/config.php';
-$cmsversion = "1.2-dev2";
+$cmsversion = "1.2";
 
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
 if($version == $cmsversion) {
