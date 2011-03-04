@@ -89,7 +89,7 @@ $sql = ("Select username from accounts WHERE username = '".$user."'");
 $result = mysql_query($sql);
 $rows = mysql_num_rows($result);
 mysql_query("INSERT INTO accounts (username, password, admin, safe) VALUES ('".$user."', '".$pw."', '1', '1')") or die ("Fehler beim erstellen des Administrators!");
-mysql_query("INSERT INTO news (username, name, text) VALUES ($user, \"Glückwunsch!\", \"Glückwunsch!\nDu hast erfolgreich wCMS ".$version." installiert!\nDu kannst diesen Newseintrag im Adminpanel löschen!\n\nMit freundlichen Grüßen, dein wCMS Team") or die("Fehler beim erstellen der Erstnews!");
+mysql_query("INSERT INTO news (username, name, text) VALUES ('".$user."', 'Glückwunsch!', 'Glückwunsch!\nDu hast erfolgreich wCMS ".$version." installiert!\nDu kannst diesen Newseintrag im Adminpanel löschen!\n\nMit freundlichen Grüßen, dein wCMS Team')") or die("Fehler beim erstellen der Erstnews!");
 header("Location: install.php?success");
 }
 }
