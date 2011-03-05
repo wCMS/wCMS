@@ -2,9 +2,6 @@
 include "lib/config.php";
 include "lib/mysql.php";
 include "lib/header.php";
-if(isset($_REQUEST['view_all_posts'])) {
-}
-else{
 $selectlinks = mysql_query("select id,name,text,username from posts");
 while($selectlink = mysql_fetch_array($selectlinks)) {
 $content = str_replace("\n", "<br>", $selectlink['text']);
@@ -17,8 +14,7 @@ echo "<br><br>";
 echo "Von ".$selectlink['username']." geschrieben";
 }
 }
-}
-if(!isset($_REQUEST[$links])) {
+if(isset($_REQUEST['all'])) {
 ?><title>Alle Beiträge - <? echo $sitename ?></title><?
 $sqls = mysql_query("select id, name from posts");
 while($sql = mysql_fetch_array($sqls)) {
