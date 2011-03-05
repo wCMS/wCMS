@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
 $name = $_POST['name'];
 $text = $_POST['text'];
 if(empty($name)) {
-header ("Location: admin.php?titleerror");
+header ("Location: admin.php?error");
 }
 else {
 mysql_query("INSERT INTO posts (name, text, username) VALUES ('".$name."', '".$text."', '".$_SESSION['adm_user_username']."')");
@@ -44,10 +44,12 @@ header ("Location: admin.php?success");
 echo "<hr>".$footer;
 }
 if(isset($_REQUEST['success'])) {
+?> <title>Erfolgreich - <? echo $sitename ?></title> <?
 echo "Aktion erfolgreich ausgeführt!<br><input type=\"button\" value=\"Zurück\" onclick=\"history.back(-1)\">";
 }
-if(isset($_REQUEST['titleerror'])) {
-echo "Bitte wähle einen Titel!<br><input type=\"button\" value=\"Zurück\" onclick=\"history.back(-1)\">";
+if(isset($_REQUEST['error'])) {
+?> <title>Fehler - <? echo $sitename ?></title> <?
+echo "Dir ist ein Fehler unterlaufen!<br><input type=\"button\" value=\"Zurück\" onclick=\"history.back(-1)\">";
 }
 if(isset($_REQUEST['userdelete'])) {
 ?> <title>Benutzer löschen - <? echo $sitename ?></title> <?
@@ -136,7 +138,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews']) and !isset($_REQUEST['success'])) {
+if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews']) and !isset($_REQUEST['success']) and !isset($_REQUEST['error'])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;
