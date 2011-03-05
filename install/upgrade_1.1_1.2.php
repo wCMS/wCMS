@@ -1,12 +1,12 @@
 <title>wCMS Upgrade</title>
 <center>
 <?
-if(file_exists("lib/install")) {
-echo "Ist noch nicht installiert! <a href=\"install.php\">Klicke hier um es zu installieren</a>";
+if(file_exists("../lib/install")) {
+echo "Ist noch nicht installiert! <a href=\"index.php\">Klicke hier um es zu installieren</a>";
 die;
 }
 else {
-include 'lib/config.php';
+include '../lib/config.php';
 $cmsversion = "1.2";
 
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
@@ -31,7 +31,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" maxlength="50"><br>
 <?
 }
 if(isset($_REQUEST['step2'])) {
-$configfile = "lib/config.php";
+$configfile = "../lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - wCMS \".\$version;\n?>";
 if (is_writable($configfile)) {
 
@@ -54,7 +54,7 @@ if (is_writable($configfile)) {
 }
 }
 if(isset($_REQUEST['step3'])) {
-include 'lib/mysql.php';
+include '../lib/mysql.php';
 mysql_query("CREATE TABLE `news` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `username` text COLLATE latin1_german1_ci NOT NULL,
@@ -72,8 +72,8 @@ echo "Upgrade erfolgreich";
 </form>
 <?
 if(isset($_POST['complete'])) {
-header ("Location: index.php");
-echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"index.php\">HIER</a>";
+header ("Location: ../index.php");
+echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"../index.php\">HIER</a>";
 }
 }
 }

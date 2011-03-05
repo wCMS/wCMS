@@ -28,19 +28,15 @@ header ("Location: admin.php?success");
 }
 if(isset($_REQUEST['delete'])) {
 ?> <title>Beitrag löschen - <? echo $sitename ?></title> <?
-$sqls = mysql_query("select name,username from posts");
+$sqls = mysql_query("select id,name,username from posts");
 while($sql = mysql_fetch_array($sqls)) {
-$sqlnametemp = str_replace(" ", "_", $sql['name']);
-$sqlname = str_replace("!", "###", $sqlnametemp);
 ?>
 <form action="" method="post">
-<input type="submit" value="<? echo $sql['name']." von ".$sql['username']." löschen"; ?>" name="<? echo $sqlname; ?>">
+<input type="submit" value="<? echo $sql['name']." von ".$sql['username']." löschen"; ?>" name="<? echo $sql['id']; ?>">
 </form>
 <?
-if(isset($_POST[$sqlname])) {
-$sqlcorrectnametemp = str_replace("_", " ", $sqlname);
-$sqlcorrectname = str_replace("###", "!", $sqlcorrectnametemp);
-mysql_query("DELETE FROM posts WHERE name = '".$sqlcorrectname."'");
+if(isset($_POST[$sql['id']])) {
+mysql_query("DELETE FROM posts WHERE name = '".$sql['id']."'");
 
 header ("Location: admin.php?success");
 }
@@ -55,15 +51,15 @@ echo "Bitte wähle einen Titel!<br><input type=\"button\" value=\"Zurück\" onclic
 }
 if(isset($_REQUEST['userdelete'])) {
 ?> <title>Benutzer löschen - <? echo $sitename ?></title> <?
-$sqls = mysql_query("select username from accounts WHERE safe = '0'");
+$sqls = mysql_query("select id,username from accounts WHERE safe = '0'");
 while($sql = mysql_fetch_array($sqls)) {
 ?>
 <form action="" method="post">
-<input type="submit" value="<? echo $sql['username']." löschen"; ?>" name="<? echo $sql['username']; ?>">
+<input type="submit" value="<? echo $sql['username']." löschen"; ?>" name="<? echo $sql['id']; ?>">
 </form>
 <?
 if(isset($_POST[$sql['username']])) {
-mysql_query("DELETE FROM accounts WHERE username = '".$sql['username']."' and safe = '0'");
+mysql_query("DELETE FROM accounts WHERE username = '".$sql['id']."' and safe = '0'");
 
 header ("Location: admin.php?success");
 }
@@ -125,17 +121,15 @@ header ("Location: admin.php?success");
 }
 if(isset($_REQUEST['deletenews'])) {
 ?> <title>News löschen - <? echo $sitename ?></title> <?
-$sqls33 = mysql_query("select name,username from news");
+$sqls33 = mysql_query("select id,name,username from news");
 while($sql33 = mysql_fetch_array($sqls33)) {
-$sql33name = str_replace(" ", "_", $sql33['name']);
 ?>
 <form action="" method="post">
-<input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33name; ?>">
+<input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33['id']; ?>">
 </form>
 <?
 if(isset($_POST[$sql33name])) {
-$sql33correctname = str_replace("_", " ", $sql33name);
-mysql_query("DELETE FROM news WHERE name = '".$sql33correctname."'");
+mysql_query("DELETE FROM news WHERE name = '".$sql33['id']."'");
 
 header ("Location: admin.php?success");
 }

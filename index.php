@@ -1,6 +1,6 @@
 <?php  
 if(file_exists("lib/install")) {
-echo "<center>Das Script ist nicht installiert! Jetzt installieren? <a href=\"install.php\">Ja</a> oder <a href=\"index.php\">Nein</a></center>";
+echo "<center>Das Script ist nicht installiert! Jetzt installieren? <a href=\"install/install.php\">Ja</a> oder <a href=\"index.php\">Nein</a></center>";
 die;
 }
 else {
