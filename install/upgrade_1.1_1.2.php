@@ -15,13 +15,13 @@ echo "Kein Upgrade möglich.<br>Es wird bereits die aktuelle Version genutzt oder
 die;
 }
 ?>
-<a href="upgrade.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
+<a href="upgrade_1.1_1.2.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
 <?
 }
 if(isset($_REQUEST['step1'])) {
 ?>
-<form action="upgrade.php?step2" method="post">
+<form action="upgrade_1.1_1.2.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" maxlength="25"><br>
 Datenbank-Host: <input type="text" name="dbhost" maxlength="50"><br>
 Datenbank-Name: <input type="text" name="dbname" maxlength="25"><br>
@@ -47,7 +47,7 @@ if (is_writable($configfile)) {
     print "Konfiguration erfolgreich!";
 
     fclose($handle);
-	echo "<br><a href='upgrade.php?step3'>Weiter</a>";
+	echo "<br><a href='upgrade_1.1_1.2.php?step3'>Weiter</a>";
 
 } else {
     print "Die Datei $configfile ist nicht schreibbar";
@@ -62,12 +62,12 @@ mysql_query("CREATE TABLE `news` (
   `text` text COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
-header("Location: upgrade.php?success");
+header("Location: upgrade_1.1_1.2.php?success");
 }
 if(isset($_REQUEST['success'])) {
 echo "Upgrade erfolgreich";
 ?>
-<form action="upgrade.php?success" method="post">
+<form action="upgrade_1.1_1.2.php?success" method="post">
 <input type="submit" name="complete" value="Upgrade abschließen">
 </form>
 <?
