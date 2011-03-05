@@ -36,7 +36,7 @@ while($sql = mysql_fetch_array($sqls)) {
 </form>
 <?
 if(isset($_POST[$sql['id']])) {
-mysql_query("DELETE FROM posts WHERE name = '".$sql['id']."'");
+mysql_query("DELETE FROM posts WHERE id = '".$sql['id']."'");
 
 header ("Location: admin.php?success");
 }
@@ -128,8 +128,8 @@ while($sql33 = mysql_fetch_array($sqls33)) {
 <input type="submit" value="<? echo $sql33['name']." von ".$sql33['username']." löschen"; ?>" name="<? echo $sql33['id']; ?>">
 </form>
 <?
-if(isset($_POST[$sql33name])) {
-mysql_query("DELETE FROM news WHERE name = '".$sql33['id']."'");
+if(isset($_POST[$sql33['id']])) {
+mysql_query("DELETE FROM news WHERE id = '".$sql33['id']."'");
 
 header ("Location: admin.php?success");
 }
