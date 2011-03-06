@@ -1,5 +1,5 @@
 <?php  
-if(file_exists("lib/install")) {
+if(file_exists("lib/config.php.new")) {
 echo "<center>Das Script ist nicht installiert! Jetzt installieren? <a href=\"install/install.php\">Ja</a> oder <a href=\"index.php\">Nein</a></center>";
 die;
 }

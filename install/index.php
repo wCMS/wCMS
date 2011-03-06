@@ -1,17 +1,16 @@
 <title>wCMS Installation</title>
 <center>
 <?
+$cmsversion = "1.3";
+if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 if(!file_exists("../lib/config.php")) {
 rename("../lib/config.php.new", "../lib/config.php");
 }
-if(!file_exists("../lib/install")) {
+if(file_exists("../lib/config.php")) {
 echo "wCMS ist bereits installiert! Um ein Upgrade zu machen, klicke bitte <a href=\"upgrade.php\">HIER</a>";
 header("Location: upgrade.php");
 die;
 }
-else {
-$cmsversion = "1.3";
-if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
 ?>
 <a href="index.php?step1">Mit der Installation beginnen</a>
 </form>
@@ -108,7 +107,6 @@ if(isset($_POST['complete'])) {
 unlink("../lib/install");
 header ("Location: ../index.php");
 echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"../index.php\">HIER</a>";
-}
 }
 }
 ?>
