@@ -1,8 +1,12 @@
 <title>wCMS Installation</title>
 <center>
 <?
+if(!file_exists("../lib/config.php")) {
+rename("../lib/config.php.new", "../lib/config.php");
+}
 if(!file_exists("../lib/install")) {
 echo "wCMS ist bereits installiert! Um ein Upgrade zu machen, klicke bitte <a href=\"upgrade.php\">HIER</a>";
+header("Location: upgrade.php");
 die;
 }
 else {
