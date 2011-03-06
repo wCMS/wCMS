@@ -1,7 +1,6 @@
 <title>wCMS Upgrade</title>
 <center>
 <?
-else {
 include '../lib/config.php';
 $cmsversion = "1.3";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
@@ -69,7 +68,6 @@ echo "Upgrade erfolgreich";
 if(isset($_POST['complete'])) {
 header ("Location: ../index.php");
 echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"../index.php\">HIER</a>";
-}
 }
 }
 ?>

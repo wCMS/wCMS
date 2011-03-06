@@ -1,7 +1,7 @@
 <title>Upgrade</title>
 <?php
 include '../lib/config.php';
-$cmsversion = "1.3"
+$cmsversion = "1.3";
 if(file_exists("../lib/install")) {
 echo "Ist noch nicht installiert! <a href=\"index.php\">Klicke hier um es zu installieren</a>";
 die;
