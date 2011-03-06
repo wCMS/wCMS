@@ -3,7 +3,11 @@
 <?
 $cmsversion = "1.3";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['step4']) and !isset($_REQUEST['success']) and !isset($_REQUEST['step3'])) {
-if(!file_exists("../lib/config.php")) {
+if(file_exists("../lib/config.php")) {
+echo "<a href=\"upgrade.php\">Upgrade hier</a>";
+header("Location: upgrade.php");
+die;
+else {
 rename("../lib/config.php.new", "../lib/config.php");
 }
 ?>
