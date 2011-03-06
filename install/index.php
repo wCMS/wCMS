@@ -6,11 +6,6 @@ if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUES
 if(!file_exists("../lib/config.php")) {
 rename("../lib/config.php.new", "../lib/config.php");
 }
-if(file_exists("../lib/config.php")) {
-echo "wCMS ist bereits installiert! Um ein Upgrade zu machen, klicke bitte <a href=\"upgrade.php\">HIER</a>";
-header("Location: upgrade.php");
-die;
-}
 ?>
 <a href="index.php?step1">Mit der Installation beginnen</a>
 </form>
