@@ -111,7 +111,7 @@ echo "<hr>".$footer;
 }
 if(isset($_POST['newssubmit'])) {
 $name = $_POST['name'];
-$text = str_replace("\r\n", "<br>", $_POST['text'];
+$text = str_replace("\r\n", "<br>", $_POST['text']);
 if(empty($name)) {
 header ("Location: admin.php?titleerror");
 }
