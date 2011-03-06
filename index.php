@@ -15,7 +15,7 @@ include "lib/header.php";
 <body>
 <? $sqls = mysql_query("select name,text,username from news");
 while($sql = mysql_fetch_array($sqls)) {
-$text = str_replace("\n", "<br>", $sql['text']);
+$text = $sql['text'];
 echo 'Titel: '.$sql['name'].'<br><br>'.$text.'<br><br>Von '.$sql['username'].' geschrieben<hr>';
 }
 }

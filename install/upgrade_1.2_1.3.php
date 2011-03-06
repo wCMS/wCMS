@@ -1,17 +1,18 @@
 <title>wCMS Upgrade</title>
 <center>
 <?
+else {
 include '../lib/config.php';
-$cmsversion = "1.2";
+$cmsversion = "1.3";
 if(!isset($_REQUEST['step1']) and !isset($_REQUEST['step2']) and !isset($_REQUEST['step3']) and !isset($_REQUEST['success'])) {
 ?>
-<a href="upgrade_1.1_1.2.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
+<a href="upgrade_1.2_1.3.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
 <?
 }
 if(isset($_REQUEST['step1'])) {
 ?>
-<form action="upgrade_1.1_1.2.php?step2" method="post">
+<form action="upgrade_1.2_1.3.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" value="<? echo $sitename ?>" maxlength="25"><br>
 Datenbank-Host: <input type="text" name="dbhost" value="<? echo $dbhost ?>" maxlength="50"><br>
 Datenbank-Name: <input type="text" name="dbname" value="<? echo $dbname ?>" maxlength="25"><br>
@@ -37,7 +38,7 @@ if (is_writable($configfile)) {
     print "Konfiguration erfolgreich!";
 
     fclose($handle);
-	echo "<br><a href='upgrade_1.1_1.2.php?step3'>Weiter</a>";
+	echo "<br><a href='upgrade_1.2_1.3.php?step3'>Weiter</a>";
 
 } else {
     print "Die Datei $configfile ist nicht schreibbar";
@@ -45,25 +46,30 @@ if (is_writable($configfile)) {
 }
 if(isset($_REQUEST['step3'])) {
 include '../lib/mysql.php';
-mysql_query("CREATE TABLE `news` (
-  `id` int(100) NOT NULL AUTO_INCREMENT,
-  `username` text COLLATE latin1_german1_ci NOT NULL,
-  `name` text COLLATE latin1_german1_ci NOT NULL,
-  `text` text COLLATE latin1_german1_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
-header("Location: upgrade_1.1_1.2.php?success");
+$sqlsnews = mysql_query("SELECT text FROM news");
+while($sqlnews = mysql_fetch_array($sqlsnews)) {
+$newstext = str_replace("\n", "<br>", $sqlnews['text']);
+mysql_query("UPDATE `news` SET `text`='".$newstext."' WHERE `text`='".$sqlnews['text']."'");
+}
+$sqlsposts = mysql_query("SELECT text FROM posts");
+while($sqlposts = mysql_fetch_array($sqlsposts)) {
+$poststext = str_replace("\n", "<br>", $sqlposts['text']);
+mysql_query("UPDATE `posts` SET `text`='".$poststext."' WHERE `text`='".$sqlposts['text']."'");
+}
+header("Location: upgrade_1.2_1.3.php?success");
+echo "<a href=\"upgrade_1.2_1.3.php?success\">Weiter</a>";
 }
 if(isset($_REQUEST['success'])) {
 echo "Upgrade erfolgreich";
 ?>
-<form action="upgrade_1.1_1.2.php?success" method="post">
+<form action="upgrade_1.2_1.3.php?success" method="post">
 <input type="submit" name="complete" value="Upgrade abschließen">
 </form>
 <?
 if(isset($_POST['complete'])) {
 header ("Location: ../index.php");
 echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"../index.php\">HIER</a>";
+}
 }
 }
 ?>
