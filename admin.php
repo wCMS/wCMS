@@ -3,7 +3,8 @@ include "lib/config.php";
 include "lib/adm_session.php";
 include "lib/mysql.php";
 include "lib/header.php";
-?><center><a href="admin.php?createnews">News erstellen</a> | <a href="admin.php?create">Beitrag erstellen</a> | <a href="admin.php?deletenews">News löschen</a> | <a href="admin.php?delete">Beitrag löschen</a> | <a href="admin.php?userdelete">Benutzer löschen</a> | <a href="admin.php?users">Benutzerliste</a> | <a href="admin.php?usermanagement">Benutzerverwaltung</a></center><hr><?
+include "lib/menu.php"
+echo "<center>$menu_admin</center><hr>";
 if(isset($_REQUEST['create'])) { ?>
 <title>Beitrag erstellen - <? echo $sitename ?></title>
 <form action="" method="post">
