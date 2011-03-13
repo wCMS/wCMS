@@ -3,7 +3,7 @@ include "lib/config.php";
 include "lib/adm_session.php";
 include "lib/mysql.php";
 include "lib/header.php";
-include "lib/menu.php"
+include "lib/menu.php";
 echo "<center>$menu_admin</center><hr>";
 if(isset($_REQUEST['create'])) { ?>
 <title>Beitrag erstellen - <? echo $sitename ?></title>
