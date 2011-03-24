@@ -2,7 +2,7 @@
 <center>
 <?
 $cmsversion = "1.4";
-if(isset($_REQUEST[''])) {
+if(empty($_REQUEST[''])) {
 if(file_exists("../lib/config.php")) {
 echo "<a href=\"upgrade.php\">Upgrade hier</a>";
 header("Location: upgrade.php");
@@ -106,6 +106,7 @@ if(isset($_POST['complete'])) {
 unlink("../lib/install");
 header ("Location: ../index.php");
 echo "Wenn die automatische Weiterleitung nicht funktioniert, klicke bitte <a href=\"../index.php\">HIER</a>";
+}
 }
 }
 ?>
