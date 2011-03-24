@@ -5,13 +5,13 @@ include '../lib/config.php';
 $cmsversion = "1.3";
 if(isset($_REQUEST[''])) {
 ?>
-<a href="upgrade_1.2_1.3.php?step=1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
+<a href="upgrade_1.2_1.3.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
 <?
 }
-if(isset($_REQUEST['step' == 1])) {
+if(isset($_REQUEST['step1'])) {
 ?>
-<form action="upgrade_1.2_1.3.php?step=2" method="post">
+<form action="upgrade_1.2_1.3.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" value="<? echo $sitename ?>" maxlength="25"><br>
 Datenbank-Host: <input type="text" name="dbhost" value="<? echo $dbhost ?>" maxlength="50"><br>
 Datenbank-Name: <input type="text" name="dbname" value="<? echo $dbname ?>" maxlength="25"><br>
@@ -20,7 +20,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" value="<? echo $dbpas
 <input type="submit" name="configure" value="Weiter">
 <?
 }
-if(isset($_REQUEST['step' == 2])) {
+if(isset($_REQUEST['step2'])) {
 $configfile = "../lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - <a href=\"http://www.w-cms.tk/\" target=\"_blank\">wCMS \".\$version.\"</a>\";\n?>";
 if (is_writable($configfile)) {
@@ -37,13 +37,13 @@ if (is_writable($configfile)) {
     print "Konfiguration erfolgreich!";
 
     fclose($handle);
-	echo "<br><a href='upgrade_1.2_1.3.php?step=3'>Weiter</a>";
+	echo "<br><a href='upgrade_1.2_1.3.php?step3'>Weiter</a>";
 
 } else {
     print "Die Datei $configfile ist nicht schreibbar";
 }
 }
-if(isset($_REQUEST['step' == 3])) {
+if(isset($_REQUEST['step3'])) {
 include '../lib/mysql.php';
 $sqlsnews = mysql_query("SELECT text FROM news");
 while($sqlnews = mysql_fetch_array($sqlsnews)) {

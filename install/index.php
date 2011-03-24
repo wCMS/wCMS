@@ -11,13 +11,13 @@ else {
 rename("../lib/config.php.new", "../lib/config.php");
 }
 ?>
-<a href="index.php?step=1">Mit der Installation beginnen</a>
+<a href="index.php?step1">Mit der Installation beginnen</a>
 </form>
 <?
 }
-if(isset($_REQUEST['step' == 1])) {
+if(isset($_REQUEST['step1'])) {
 ?>
-<form action="index.php?step=2" method="post">
+<form action="index.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" maxlength="25"><br>
 Datenbank-Host: <input type="text" name="dbhost" maxlength="50"><br>
 Datenbank-Name: <input type="text" name="dbname" maxlength="25"><br>
@@ -26,7 +26,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" maxlength="50"><br>
 <input type="submit" name="configure" value="Weiter">
 <?
 }
-if(isset($_REQUEST['step' == 2])) {
+if(isset($_REQUEST['step2'])) {
 $configfile = "../lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - <a href=\"http://www.w-cms.tk/\" target=\"_blank\">wCMS \".\$version.\"</a>\";\n?>";
 if (is_writable($configfile)) {
@@ -43,13 +43,13 @@ if (is_writable($configfile)) {
     print "Konfiguration erfolgreich!";
 
     fclose($handle);
-	echo "<br><a href='index.php?step=3'>Weiter</a>";
+	echo "<br><a href='index.php?step3'>Weiter</a>";
 
 } else {
     print "Die Datei $configfile ist nicht schreibbar";
 }
 }
-if(isset($_REQUEST['step' == 3])) {
+if(isset($_REQUEST['step3'])) {
 include '../lib/config.php';
 include '../lib/mysql.php';
 mysql_query("CREATE TABLE `accounts` (
@@ -74,10 +74,10 @@ mysql_query("CREATE TABLE `news` (
   `text` text COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
-header("Location: index.php?step=4");
+header("Location: index.php?step4");
 }
-if(isset($_REQUEST['step' == 4])) {
-?> <form action="index.php?step=4" method="post">
+if(isset($_REQUEST['step4'])) {
+?> <form action="index.php?step4" method="post">
 Benutzername: <input type="text" name="username" maxlength="25"><br>
 Passwort: <input type="password" name="password" maxlength="25"><br>
 <input type="submit" name="create" value="erstellen">

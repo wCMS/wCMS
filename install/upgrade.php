@@ -18,4 +18,5 @@ header("Location: upgrade_1.2_1.3.php");
 }
 if($version == "1.3") {
 header("Location: upgrade_1.3_1.4.php");
+}
 ?>
