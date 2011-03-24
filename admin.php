@@ -17,7 +17,8 @@ echo "<hr>".$footer;
 }
 if(isset($_POST['submit'])) {
 $name = $_POST['name'];
-$text = str_replace("\r\n", "<br>", $_POST['text']);
+$pretext = str_replace("\r\n", "<br>", $_POST['text']);
+$text = str_replace("href=\"", "href=\"./redirect.php?url=", $pretext);
 if(empty($name)) {
 header ("Location: admin.php?error");
 }
@@ -112,7 +113,8 @@ echo "<hr>".$footer;
 }
 if(isset($_POST['newssubmit'])) {
 $name = $_POST['name'];
-$text = str_replace("\r\n", "<br>", $_POST['text']);
+$pretext = str_replace("\r\n", "<br>", $_POST['text']);
+$text = str_replace("href=\"", "href=\"./redirect.php?url=", $pretext);
 if(empty($name)) {
 header ("Location: admin.php?titleerror");
 }
@@ -139,7 +141,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(!isset($_REQUEST['create']) and !isset($_REQUEST['delete']) and !isset($_REQUEST['userdelete']) and !isset($_REQUEST['users']) and !isset($_REQUEST['usermanagement']) and !isset($_REQUEST['createnews']) and !isset($_REQUEST['deletenews']) and !isset($_REQUEST['success']) and !isset($_REQUEST['error'])) {
+if(isset($_REQUEST[''])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;
