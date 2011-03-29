@@ -8,7 +8,7 @@ include "lib/header.php";
 <html>  
 <body>  
 <?php  
-if (isset ($_REQUEST["error"]))  
+if (isset ($_GET["error"]))  
 {  
   echo "Die Zugangsdaten waren ungültig.";  
 }  
@@ -22,7 +22,7 @@ Passwort: <input type="password" name="pwd" size="20"><br>
 </html
 
 <?php
-if(isset($_REQUEST['login'])) {   
+if(isset($_GET['login'])) {   
 session_start ();   
 $connectionid = mysql_connect ($dbhost, $dbuser, $dbpasswd);  
 if (!mysql_select_db ($dbname, $connectionid))  
@@ -35,8 +35,8 @@ $sql = "SELECT ".
   "FROM ".  
     "accounts ".  
   "WHERE ".  
-    "(username like '".$_REQUEST["name"]."') AND ".  
-    "(password = '".sha1($_REQUEST["pwd"])."')";  
+    "(username like '".$_GET["name"]."') AND ".  
+    "(password = '".sha1($_GET["pwd"])."')";  
 $result = mysql_query ($sql);  
 
 if (mysql_num_rows ($result) > 0)  
@@ -63,7 +63,7 @@ else
   header ("Location: login.php?error");  
 }
 } 
-if(isset($_REQUEST["logout"])) {   
+if(isset($_GET["logout"])) {   
 ob_start ();  
 
 session_start ();  

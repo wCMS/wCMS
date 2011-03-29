@@ -5,7 +5,7 @@ include "lib/mysql.php";
 include "lib/header.php";
 include "lib/menu.php";
 echo "<center>$menu_admin</center><hr>";
-if(isset($_REQUEST['create'])) { ?>
+if(isset($_GET['create'])) { ?>
 <title>Beitrag erstellen - <? echo $sitename ?></title>
 <form action="" method="post">
 Titel: <input type="text" name="name" size="80" maxlength="50"><br>
@@ -17,7 +17,7 @@ echo "<hr>".$footer;
 }
 if(isset($_POST['submit'])) {
 $name = $_POST['name'];
-$pretext = str_replace("\r\n", "<br>", $_POST['text']);
+$pretext = str_replace("\r\n", "\r\n<br>", $_POST['text']);
 $text = str_replace("href=\"", "href=\"./redirect.php?url=", $pretext);
 if(empty($name)) {
 header ("Location: admin.php?error");
@@ -28,7 +28,7 @@ mysql_query("INSERT INTO posts (name, text, username) VALUES ('".$name."', '".$t
 header ("Location: admin.php?success");
 }
 }
-if(isset($_REQUEST['delete'])) {
+if(isset($_GET['delete'])) {
 ?> <title>Beitrag löschen - <? echo $sitename ?></title> <?
 $sqls = mysql_query("select id,name,username from posts");
 while($sql = mysql_fetch_array($sqls)) {
@@ -45,15 +45,15 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(isset($_REQUEST['success'])) {
+if(isset($_GET['success'])) {
 ?> <title>Erfolgreich - <? echo $sitename ?></title> <?
 echo "Aktion erfolgreich ausgeführt!<br><input type=\"button\" value=\"Zurück\" onclick=\"history.back(-1)\">";
 }
-if(isset($_REQUEST['error'])) {
+if(isset($_GET['error'])) {
 ?> <title>Fehler - <? echo $sitename ?></title> <?
 echo "Dir ist ein Fehler unterlaufen!<br><input type=\"button\" value=\"Zurück\" onclick=\"history.back(-1)\">";
 }
-if(isset($_REQUEST['userdelete'])) {
+if(isset($_GET['userdelete'])) {
 ?> <title>Benutzer löschen - <? echo $sitename ?></title> <?
 $sqls = mysql_query("select id,username from accounts WHERE safe = '0'");
 while($sql = mysql_fetch_array($sqls)) {
@@ -70,7 +70,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(isset($_REQUEST['users'])) {
+if(isset($_GET['users'])) {
 ?> <title>Benutzerliste - <? echo $sitename ?></title> <?
 echo "<b><u>Administratoren:</u></b><br>";
 $sqlsadmin = mysql_query("select username from accounts where admin = '1'");
@@ -84,7 +84,7 @@ echo $sql['username']."<br>";
 }
 echo "<hr>".$footer;
 }
-if(isset($_REQUEST['usermanagement'])) {
+if(isset($_GET['usermanagement'])) {
 ?> <title>Benutzerverwaltung - <? echo $sitename ?></title> <?
 $sqls = mysql_query("select username from accounts WHERE admin = '0'");
 while($sql = mysql_fetch_array($sqls)) {
@@ -101,7 +101,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(isset($_REQUEST['createnews'])) { ?>
+if(isset($_GET['createnews'])) { ?>
 <title>News erstellen - <? echo $sitename ?></title>
 <form action="" method="post">
 Titel: <input type="text" name="name" size="80" maxlength="50"><br>
@@ -113,7 +113,7 @@ echo "<hr>".$footer;
 }
 if(isset($_POST['newssubmit'])) {
 $name = $_POST['name'];
-$pretext = str_replace("\r\n", "<br>", $_POST['text']);
+$pretext = str_replace("\r\n", "\r\n<br>", $_POST['text']);
 $text = str_replace("href=\"", "href=\"./redirect.php?url=", $pretext);
 if(empty($name)) {
 header ("Location: admin.php?titleerror");
@@ -124,7 +124,7 @@ mysql_query("INSERT INTO news (name, text, username) VALUES ('".$name."', '".$te
 header ("Location: admin.php?success");
 }
 }
-if(isset($_REQUEST['deletenews'])) {
+if(isset($_GET['deletenews'])) {
 ?> <title>News löschen - <? echo $sitename ?></title> <?
 $sqls33 = mysql_query("select id,name,username from news");
 while($sql33 = mysql_fetch_array($sqls33)) {
@@ -141,7 +141,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(isset($_REQUEST[''])) {
+if(isset($_GET[''])) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;

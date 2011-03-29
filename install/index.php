@@ -2,7 +2,7 @@
 <center>
 <?
 $cmsversion = "1.4";
-if(empty($_REQUEST[''])) {
+if(empty($_GET)) {
 if(file_exists("../lib/config.php")) {
 echo "<a href=\"upgrade.php\">Upgrade hier</a>";
 header("Location: upgrade.php");
@@ -15,7 +15,7 @@ rename("../lib/config.php.new", "../lib/config.php");
 </form>
 <?
 }
-if(isset($_REQUEST['step1'])) {
+if(isset($_GET['step1'])) {
 ?>
 <form action="index.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" maxlength="25"><br>
@@ -26,7 +26,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" maxlength="50"><br>
 <input type="submit" name="configure" value="Weiter">
 <?
 }
-if(isset($_REQUEST['step2'])) {
+if(isset($_GET['step2'])) {
 $configfile = "../lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - <a href=\"http://www.w-cms.tk/\" target=\"_blank\">wCMS \".\$version.\"</a>\";\n?>";
 if (is_writable($configfile)) {
@@ -49,7 +49,7 @@ if (is_writable($configfile)) {
     print "Die Datei $configfile ist nicht schreibbar";
 }
 }
-if(isset($_REQUEST['step3'])) {
+if(isset($_GET['step3'])) {
 include '../lib/config.php';
 include '../lib/mysql.php';
 mysql_query("CREATE TABLE `accounts` (
@@ -76,7 +76,7 @@ mysql_query("CREATE TABLE `news` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
 header("Location: index.php?step4");
 }
-if(isset($_REQUEST['step4'])) {
+if(isset($_GET['step4'])) {
 ?> <form action="index.php?step4" method="post">
 Benutzername: <input type="text" name="username" maxlength="25"><br>
 Passwort: <input type="password" name="password" maxlength="25"><br>
@@ -95,7 +95,7 @@ mysql_query("INSERT INTO news (username, name, text) VALUES ('".$user."', 'Glück
 header("Location: index.php?success");
 }
 }
-if(isset($_REQUEST['success'])) {
+if(isset($_GET['success'])) {
 echo "Installation erfolgreich";
 ?>
 <form action="index.php?success" method="post">
