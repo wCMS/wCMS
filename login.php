@@ -8,6 +8,11 @@ include "lib/mysql.php";
 <?php session_start (); ?> 
 <html>  
 <body>  
+<?if(isset($_REQUEST["error"]))  
+{  
+  echo "Die Zugangsdaten waren ungültig.";  
+}  
+?>
 <form action="login.php?login" method="post">  
 Benutzername: <input type="text" name="name" size="20"><br>  
 Passwort: <input type="password" name="pwd" size="20"><br>  
@@ -63,11 +68,6 @@ session_destroy ();
 header ("Location: index.php");  
 ob_end_flush ();  
 } 
-
-if(isset($_REQUEST["error"]))  
-{  
-  echo "Die Zugangsdaten waren ungültig.";  
-}  
 
 echo $footer;
 ?>

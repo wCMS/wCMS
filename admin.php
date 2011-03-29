@@ -141,7 +141,7 @@ header ("Location: admin.php?success");
 }
 echo "<hr>".$footer;
 }
-if(isset($_GET[''])) {
+if(empty($_GET)) {
 ?> <title>Adminpanel - <? echo $sitename ?></title><?
 echo "Bitte wähle einer der oben genannten Optionen";
 echo "<hr>".$footer;
