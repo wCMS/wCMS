@@ -2,17 +2,12 @@
 <?php
 include "lib/config.php";
 include "lib/header.php";
+include "lib/mysql.php";
 ?>
 <title>Login - <? echo $sitename ?></title>
 <?php session_start (); ?> 
 <html>  
 <body>  
-<?php  
-if (isset ($_GET["error"]))  
-{  
-  echo "Die Zugangsdaten waren ungültig.";  
-}  
-?>  
 <form action="login.php?login" method="post">  
 Benutzername: <input type="text" name="name" size="20"><br>  
 Passwort: <input type="password" name="pwd" size="20"><br>  
@@ -22,21 +17,16 @@ Passwort: <input type="password" name="pwd" size="20"><br>
 </html
 
 <?php
-if(isset($_GET['login'])) {   
+if(isset($_REQUEST['login'])) {   
 session_start ();   
-$connectionid = mysql_connect ($dbhost, $dbuser, $dbpasswd);  
-if (!mysql_select_db ($dbname, $connectionid))  
-{  
-  die ("Verbindung zur Datenbank konnte nicht hergestellt werden!");  
-}  
 
 $sql = "SELECT ".  
     "id, username, password ".  
   "FROM ".  
     "accounts ".  
   "WHERE ".  
-    "(username like '".$_GET["name"]."') AND ".  
-    "(password = '".sha1($_GET["pwd"])."')";  
+    "(username like '".$_REQUEST["name"]."') AND ".  
+    "(password = '".sha1($_REQUEST["pwd"])."')";  
 $result = mysql_query ($sql);  
 
 if (mysql_num_rows ($result) > 0)  
@@ -63,7 +53,7 @@ else
   header ("Location: login.php?error");  
 }
 } 
-if(isset($_GET["logout"])) {   
+if(isset($_REQUEST["logout"])) {   
 ob_start ();  
 
 session_start ();  
@@ -73,5 +63,12 @@ session_destroy ();
 header ("Location: index.php");  
 ob_end_flush ();  
 } 
+
+if(isset($_REQUEST["error"]))  
+{  
+  echo "Die Zugangsdaten waren ungültig.";  
+}  
+
+echo $footer;
 ?>
 </center>

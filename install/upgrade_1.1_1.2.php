@@ -3,13 +3,13 @@
 <?
 include '../lib/config.php';
 $cmsversion = "1.2";
-if(empty($_GET)) {
+if(empty($_REQUEST)) {
 ?>
 <a href="upgrade_1.1_1.2.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
 <?
 }
-if(isset($_GET['step1'])) {
+if(isset($_REQUEST['step1'])) {
 ?>
 <form action="upgrade_1.1_1.2.php?step2" method="post">
 Seitenname: <input type="text" name="sitename" value="<? echo $sitename ?>" maxlength="25"><br>
@@ -20,9 +20,9 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" value="<? echo $dbpas
 <input type="submit" name="configure" value="Weiter">
 <?
 }
-if(isset($_GET['step2'])) {
+if(isset($_REQUEST['step2'])) {
 $configfile = "../lib/config.php";
-$write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - <a href=\"http://www.w-cms.tk/\" target=\"_blank\">wCMS \".\$version.\"</a>\";\n?>";
+$write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - wCMS \".\$version;\n?>";
 if (is_writable($configfile)) {
 
     if (!$handle = fopen($configfile, "w+")) {
@@ -43,7 +43,7 @@ if (is_writable($configfile)) {
     print "Die Datei $configfile ist nicht schreibbar";
 }
 }
-if(isset($_GET['step3'])) {
+if(isset($_REQUEST['step3'])) {
 include '../lib/mysql.php';
 mysql_query("CREATE TABLE `news` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
@@ -54,7 +54,7 @@ mysql_query("CREATE TABLE `news` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci") or die (mysql_error());
 header("Location: upgrade_1.1_1.2.php?success");
 }
-if(isset($_GET['success'])) {
+if(isset($_REQUEST['success'])) {
 echo "Upgrade erfolgreich";
 ?>
 <form action="upgrade_1.1_1.2.php?success" method="post">
