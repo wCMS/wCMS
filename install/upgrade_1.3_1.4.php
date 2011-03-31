@@ -3,15 +3,16 @@
 <?
 include '../lib/config.php';
 $cmsversion = "1.4";
-if(empty($_REQUEST)) {
+if(empty($_GET)) {
 ?>
-<a href="upgrade_1.3_1.4.php?step1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
+<a href="upgrade_1.3_1.4.php?step=1">Mit dem Upgrade von <? echo $version." auf ".$cmsversion ?> beginnen</a>
 </form>
 <?
 }
-if(isset($_REQUEST['step1'])) {
+if(isset($_GET['step'])) {
+if($_GET['step'] == 1) {
 ?>
-<form action="upgrade_1.3_1.4.php?step2" method="post">
+<form action="upgrade_1.3_1.4.php?step=2" method="post">
 Seitenname: <input type="text" name="sitename" value="<? echo $sitename ?>" maxlength="25"><br>
 Datenbank-Host: <input type="text" name="dbhost" value="<? echo $dbhost ?>" maxlength="50"><br>
 Datenbank-Name: <input type="text" name="dbname" value="<? echo $dbname ?>" maxlength="25"><br>
@@ -20,7 +21,7 @@ Datenbank-Passwort: <input type="password" name="dbpasswd" value="<? echo $dbpas
 <input type="submit" name="configure" value="Weiter">
 <?
 }
-if(isset($_REQUEST['step2'])) {
+if($_GET['step'] == 2) {
 $configfile = "../lib/config.php";
 $write = "<?php\n\$sitename = \"".$_POST['sitename']."\";\n\$dbhost = \"".$_POST['dbhost']."\";\n\$dbuser = \"".$_POST['dbuser']."\";\n\$dbpasswd = \"".$_POST['dbpasswd']."\";\n\$dbname = \"".$_POST['dbname']."\";\n//do not touch following\n\$version = \"".$cmsversion."\";\n\$footer = \"Copyright by \".\$sitename.\" - <a href='http://www.w-cms.tk/' target='_blank'>wCMS \".\$version.\"</a>\";\n?>";
 if (is_writable($configfile)) {
@@ -37,13 +38,14 @@ if (is_writable($configfile)) {
     print "Konfiguration erfolgreich!";
 
     fclose($handle);
-	echo "<br><a href='upgrade_1.3_1.4.php?step3'>Weiter</a>";
+	echo "<br><a href='upgrade_1.3_1.4.php?step=3'>Weiter</a>";
+	header("Location: upgrade_1.3_1.4.php?step=3");
 
 } else {
     print "Die Datei $configfile ist nicht schreibbar";
 }
 }
-if(isset($_REQUEST['step3'])) {
+if($_GET['step'] == 3) {
 include '../lib/mysql.php';
 mysql_query("CREATE TABLE `pm` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
@@ -66,7 +68,8 @@ mysql_query("UPDATE `posts` SET `text`='".$poststext."' WHERE `text`='".$sqlpost
 header("Location: upgrade_1.3_1.4.php?success");
 echo "<a href=\"upgrade_1.3_1.4.php?success\">Weiter</a>";
 }
-if(isset($_REQUEST['success'])) {
+}
+if(isset($_GET['success'])) {
 echo "Upgrade erfolgreich";
 ?>
 <form action="upgrade_1.3_1.4.php?success" method="post">
