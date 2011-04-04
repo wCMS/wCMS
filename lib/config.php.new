@@ -6,5 +6,5 @@ $dbpasswd = "";
 $dbname = "";
 //do not touch following
 $version = "";
-$footer = "Copyright by ".$sitename." - wCMS ".$version;
+$footer = "Copyright by ".$sitename." - wCMS <a href='http://www.w-cms.tk/' target='_blank'>".$version."</a> - <a href'info.php'>Info</a>";
 ?>
